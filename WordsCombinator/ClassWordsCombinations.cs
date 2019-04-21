@@ -9,12 +9,16 @@ namespace WordsCombinator
 {
     public static class ClassWordsCombinations
     {
-        public static void copyStringListToClipboard(List<string> listCombinations)
+        /// <summary>
+        /// Receive a string list to copy them to clipboard separated by end lines.
+        /// </summary>
+        /// <param name="listString"></param>
+        public static void copyStringListToClipboard(List<string> listString)
         {
             try
             {
                 string words = "";
-                foreach (string combination in listCombinations)
+                foreach (string combination in listString)
                 {
                     words += combination.ToString() + "\n";
                 }
@@ -26,6 +30,11 @@ namespace WordsCombinator
             }
         }
 
+        /// <summary>
+        /// Receive a words list and make all combinations (pairs) between them.
+        /// </summary>
+        /// <param name="listWords"></param>
+        /// <returns></returns>
         public static List<string> constructCombinationsList(List<string> listWords)
         {
             List<string> listCombinations = new List<string>();

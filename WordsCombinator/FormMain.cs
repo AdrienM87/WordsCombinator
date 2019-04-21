@@ -7,11 +7,97 @@ namespace WordsCombinator
 {
     public partial class FormMain : Form
     {
+        #region Load
         List<string> listCombinations = new List<string>();
 
         public FormMain()
         {
             InitializeComponent();
+        }
+        #endregion
+
+        #region Process
+        private void processCombinations()
+        {
+            this.Enabled = false;
+            try
+            {
+                listCombinations = ClassWordsCombinations.constructCombinationsList(this.LstInitialWords.Items.Cast<string>().ToList());
+
+                this.LstResults.Items.AddRange(listCombinations.ToArray());
+                this.LbWords.Text = "Mots (" + this.LstInitialWords.Items.Count.ToString() + ") :";
+                this.LbCombinations.Text = "Combinaisons (" + this.listCombinations.Count.ToString() + ") :";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            this.Enabled = true;
+        }
+
+        private void processAdding()
+        {
+            try
+            {
+                if (this.TbInitialWords.Text != "" &&
+                    this.LstInitialWords.Items.Cast<string>().ToList().Contains(this.TbInitialWords.Text) == false)
+                {
+                    this.LstInitialWords.Items.Add(this.TbInitialWords.Text);
+                    this.TbInitialWords.Text = "";
+                    this.TbInitialWords.Select();
+
+                    processCombinations();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void processRemoving()
+        {
+            try
+            {
+                if (this.LstInitialWords.SelectedIndex != -1)
+                {
+                    this.LstInitialWords.Items.RemoveAt(this.LstInitialWords.SelectedIndex);
+                }
+                processCombinations();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void processCopy()
+        {
+            try
+            {
+                ClassWordsCombinations.copyStringListToClipboard(listCombinations);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        #endregion
+
+        #region Keyboard
+        private void processCheckCopyKeys(KeyEventArgs e)
+        {
+            try
+            {
+                if (e.Modifiers == Keys.Control && e.KeyCode == Keys.C)
+                {
+                    processCopy();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
@@ -69,98 +155,9 @@ namespace WordsCombinator
                 MessageBox.Show(ex.ToString());
             }
         }
+        #endregion
 
-        private void processCheckCopyKeys(KeyEventArgs e)
-        {
-            try
-            {
-                if (e.Modifiers == Keys.Control && e.KeyCode == Keys.C)
-                {
-                    processCopy();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
-        private void processCombinations()
-        {
-            this.Enabled = false;
-            try
-            {
-                listCombinations = ClassWordsCombinations.constructCombinationsList(this.LstInitialWords.Items.Cast<string>().ToList());
-
-                this.LstResults.Items.AddRange(listCombinations.ToArray());
-                this.LbWords.Text = "Mots (" + this.LstInitialWords.Items.Count.ToString() + ") :";
-                this.LbCombinations.Text = "Combinaisons (" + this.listCombinations.Count.ToString() + ") :";                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            this.Enabled = true;
-        }
-
-        private void processAdding()
-        {
-            try
-            {
-                if (this.TbInitialWords.Text != "")
-                {
-                    bool exists = false;
-                    foreach (string word in this.LstInitialWords.Items)
-                    {
-                        if (this.TbInitialWords.Text == word.ToString())
-                        {
-                            exists = true;
-                        }
-                    }
-                    if (exists == false)
-                    {
-                        this.LstInitialWords.Items.Add(this.TbInitialWords.Text);
-                        this.TbInitialWords.Text = "";
-                        this.TbInitialWords.Select();
-
-                        processCombinations();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
-        private void processRemoving()
-        {
-            try
-            {
-                if (this.LstInitialWords.SelectedIndex != -1)
-                {
-                    this.LstInitialWords.Items.RemoveAt(this.LstInitialWords.SelectedIndex);
-                }
-                processCombinations();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
-        private void processCopy()
-        {
-            try
-            {
-                ClassWordsCombinations.copyStringListToClipboard(listCombinations);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
+        #region Buttons
         private void BtAdd_Click(object sender, EventArgs e)
         {
             try
@@ -221,5 +218,6 @@ namespace WordsCombinator
                 MessageBox.Show(ex.ToString());
             }
         }
+        #endregion
     }
 }
