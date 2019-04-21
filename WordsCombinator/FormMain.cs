@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace WordsCombinator
 {
     public partial class FormMain : Form
     {
+        List<string> listCombinations = new List<string>();
+
         public FormMain()
         {
             InitializeComponent();
@@ -84,21 +87,23 @@ namespace WordsCombinator
         private void processCombinations()
         {
             this.Enabled = false;
-            this.LstResults.Items.Clear();
             try
             {
+                listCombinations.Clear();
+
                 for (int i = 0; i < this.LstInitialWords.Items.Count; i++)
                 {
                     for (int j = i; j < this.LstInitialWords.Items.Count; j++)
                     {
                         if (this.LstInitialWords.Items[i].ToString() != this.LstInitialWords.Items[j].ToString())
                         {
-                            this.LstResults.Items.Add(this.LstInitialWords.Items[i].ToString() + " " + this.LstInitialWords.Items[j].ToString());
-                            this.LstResults.Items.Add(this.LstInitialWords.Items[j].ToString() + " " + this.LstInitialWords.Items[i].ToString());
+                            listCombinations.Add(this.LstInitialWords.Items[i].ToString() + " " + this.LstInitialWords.Items[j].ToString());
+                            listCombinations.Add(this.LstInitialWords.Items[j].ToString() + " " + this.LstInitialWords.Items[i].ToString());
                         }
                     }
                 }
                 this.LbCombinations.Text = "Combinaisons (" + this.LstResults.Items.Count.ToString() + ") :";
+                this.LstResults.Items.AddRange(listCombinations.ToArray());
             }
             catch (Exception ex)
             {
@@ -157,12 +162,7 @@ namespace WordsCombinator
         {
             try
             {
-                string words = "";
-                foreach (string combination in this.LstResults.Items)
-                {
-                    words += combination.ToString() + "\n";
-                }
-                Clipboard.SetText(words);
+                ClassWordsCombinations.copyStringListToClipboard(listCombinations);
             }
             catch (Exception ex)
             {
