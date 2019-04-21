@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.label1 = new System.Windows.Forms.Label();
             this.GbAlpha = new System.Windows.Forms.GroupBox();
             this.BtCopy = new System.Windows.Forms.Button();
@@ -185,6 +186,7 @@
             this.ClientSize = new System.Drawing.Size(437, 376);
             this.Controls.Add(this.GbAlpha);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormMain";
             this.Text = "Words Combination";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
