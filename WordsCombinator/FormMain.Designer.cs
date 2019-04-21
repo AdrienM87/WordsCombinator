@@ -80,7 +80,7 @@
             this.BtCopy.Name = "BtCopy";
             this.BtCopy.Size = new System.Drawing.Size(100, 31);
             this.BtCopy.TabIndex = 11;
-            this.BtCopy.Text = "Copier";
+            this.BtCopy.Text = "Copy";
             this.BtCopy.UseVisualStyleBackColor = true;
             this.BtCopy.Click += new System.EventHandler(this.BtCopy_Click);
             // 
@@ -91,7 +91,7 @@
             this.BtQuit.Name = "BtQuit";
             this.BtQuit.Size = new System.Drawing.Size(62, 31);
             this.BtQuit.TabIndex = 10;
-            this.BtQuit.Text = "Quitter";
+            this.BtQuit.Text = "Quit";
             this.BtQuit.UseVisualStyleBackColor = true;
             this.BtQuit.Click += new System.EventHandler(this.BtQuit_Click);
             // 
@@ -101,7 +101,7 @@
             this.BtClearInitialWords.Name = "BtClearInitialWords";
             this.BtClearInitialWords.Size = new System.Drawing.Size(100, 31);
             this.BtClearInitialWords.TabIndex = 8;
-            this.BtClearInitialWords.Text = "Vider";
+            this.BtClearInitialWords.Text = "Clear";
             this.BtClearInitialWords.UseVisualStyleBackColor = true;
             this.BtClearInitialWords.Click += new System.EventHandler(this.BtClearInitialWords_Click);
             // 
@@ -110,9 +110,9 @@
             this.LbCombinations.AutoSize = true;
             this.LbCombinations.Location = new System.Drawing.Point(195, 44);
             this.LbCombinations.Name = "LbCombinations";
-            this.LbCombinations.Size = new System.Drawing.Size(78, 13);
+            this.LbCombinations.Size = new System.Drawing.Size(76, 13);
             this.LbCombinations.TabIndex = 7;
-            this.LbCombinations.Text = "Combinaisons :";
+            this.LbCombinations.Text = "Combinations :";
             // 
             // LstResults
             // 
@@ -157,9 +157,9 @@
             this.LbWords.AutoSize = true;
             this.LbWords.Location = new System.Drawing.Point(20, 43);
             this.LbWords.Name = "LbWords";
-            this.LbWords.Size = new System.Drawing.Size(36, 13);
+            this.LbWords.Size = new System.Drawing.Size(44, 13);
             this.LbWords.TabIndex = 2;
-            this.LbWords.Text = "Mots :";
+            this.LbWords.Text = "Words :";
             // 
             // TbInitialWords
             // 
