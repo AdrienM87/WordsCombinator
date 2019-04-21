@@ -62,6 +62,10 @@ namespace WordsCombinator
                 if (this.LstInitialWords.SelectedIndex != -1)
                 {
                     this.LstInitialWords.Items.RemoveAt(this.LstInitialWords.SelectedIndex);
+                    if (this.LstInitialWords.Items.Count != 0)
+                    {
+                        this.LstInitialWords.SelectedIndex = 0;
+                    }
                 }
                 processCombinations();
             }
