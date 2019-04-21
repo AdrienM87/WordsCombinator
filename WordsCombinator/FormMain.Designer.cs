@@ -30,6 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.GbAlpha = new System.Windows.Forms.GroupBox();
+            this.BtCopy = new System.Windows.Forms.Button();
             this.BtQuit = new System.Windows.Forms.Button();
             this.BtClearInitialWords = new System.Windows.Forms.Button();
             this.LbCombinations = new System.Windows.Forms.Label();
@@ -37,10 +38,9 @@
             this.BtRemove = new System.Windows.Forms.Button();
             this.BtAdd = new System.Windows.Forms.Button();
             this.LstInitialWords = new System.Windows.Forms.ListBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.LbWords = new System.Windows.Forms.Label();
             this.TbInitialWords = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.BtCopy = new System.Windows.Forms.Button();
             this.GbAlpha.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,7 +62,7 @@
             this.GbAlpha.Controls.Add(this.BtRemove);
             this.GbAlpha.Controls.Add(this.BtAdd);
             this.GbAlpha.Controls.Add(this.LstInitialWords);
-            this.GbAlpha.Controls.Add(this.label3);
+            this.GbAlpha.Controls.Add(this.LbWords);
             this.GbAlpha.Controls.Add(this.TbInitialWords);
             this.GbAlpha.Controls.Add(this.label2);
             this.GbAlpha.Location = new System.Drawing.Point(13, 13);
@@ -70,6 +70,18 @@
             this.GbAlpha.Size = new System.Drawing.Size(408, 347);
             this.GbAlpha.TabIndex = 1;
             this.GbAlpha.TabStop = false;
+            // 
+            // BtCopy
+            // 
+            this.BtCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtCopy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.BtCopy.Location = new System.Drawing.Point(195, 289);
+            this.BtCopy.Name = "BtCopy";
+            this.BtCopy.Size = new System.Drawing.Size(100, 31);
+            this.BtCopy.TabIndex = 11;
+            this.BtCopy.Text = "Copier";
+            this.BtCopy.UseVisualStyleBackColor = true;
+            this.BtCopy.Click += new System.EventHandler(this.BtCopy_Click);
             // 
             // BtQuit
             // 
@@ -139,14 +151,14 @@
             this.LstInitialWords.TabIndex = 3;
             this.LstInitialWords.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LstInitialWords_KeyDown);
             // 
-            // label3
+            // LbWords
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 43);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Mots à entrer :";
+            this.LbWords.AutoSize = true;
+            this.LbWords.Location = new System.Drawing.Point(20, 43);
+            this.LbWords.Name = "LbWords";
+            this.LbWords.Size = new System.Drawing.Size(36, 13);
+            this.LbWords.TabIndex = 2;
+            this.LbWords.Text = "Mots :";
             // 
             // TbInitialWords
             // 
@@ -165,18 +177,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Entrez la liste de mots puis découvrez la liste de toutes les combinaisons possib" +
     "les";
-            // 
-            // BtCopy
-            // 
-            this.BtCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtCopy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.BtCopy.Location = new System.Drawing.Point(195, 289);
-            this.BtCopy.Name = "BtCopy";
-            this.BtCopy.Size = new System.Drawing.Size(100, 31);
-            this.BtCopy.TabIndex = 11;
-            this.BtCopy.Text = "Copier";
-            this.BtCopy.UseVisualStyleBackColor = true;
-            this.BtCopy.Click += new System.EventHandler(this.BtCopy_Click);
             // 
             // FormMain
             // 
@@ -206,7 +206,7 @@
         private System.Windows.Forms.Button BtRemove;
         private System.Windows.Forms.Button BtAdd;
         private System.Windows.Forms.ListBox LstInitialWords;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label LbWords;
         private System.Windows.Forms.TextBox TbInitialWords;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button BtCopy;

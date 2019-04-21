@@ -25,5 +25,29 @@ namespace WordsCombinator
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        public static List<string> constructCombinationsList(List<string> listWords)
+        {
+            List<string> listCombinations = new List<string>();
+            try
+            {
+                for (int i = 0; i < listWords.Count; i++)
+                {
+                    for (int j = i; j < listWords.Count; j++)
+                    {
+                        if (listWords[i] != listWords[j])
+                        {
+                            listCombinations.Add(listWords[i] + " " + listWords[j]);
+                            listCombinations.Add(listWords[j] + " " + listWords[i]);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return listCombinations;
+        }
     }
 }

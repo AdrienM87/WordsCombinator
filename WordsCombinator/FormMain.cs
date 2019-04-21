@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace WordsCombinator
@@ -89,21 +90,11 @@ namespace WordsCombinator
             this.Enabled = false;
             try
             {
-                listCombinations.Clear();
+                listCombinations = ClassWordsCombinations.constructCombinationsList(this.LstInitialWords.Items.Cast<string>().ToList());
 
-                for (int i = 0; i < this.LstInitialWords.Items.Count; i++)
-                {
-                    for (int j = i; j < this.LstInitialWords.Items.Count; j++)
-                    {
-                        if (this.LstInitialWords.Items[i].ToString() != this.LstInitialWords.Items[j].ToString())
-                        {
-                            listCombinations.Add(this.LstInitialWords.Items[i].ToString() + " " + this.LstInitialWords.Items[j].ToString());
-                            listCombinations.Add(this.LstInitialWords.Items[j].ToString() + " " + this.LstInitialWords.Items[i].ToString());
-                        }
-                    }
-                }
-                this.LbCombinations.Text = "Combinaisons (" + this.LstResults.Items.Count.ToString() + ") :";
                 this.LstResults.Items.AddRange(listCombinations.ToArray());
+                this.LbWords.Text = "Mots (" + this.LstInitialWords.Items.Count.ToString() + ") :";
+                this.LbCombinations.Text = "Combinaisons (" + this.listCombinations.Count.ToString() + ") :";                
             }
             catch (Exception ex)
             {
