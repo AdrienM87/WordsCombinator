@@ -125,6 +125,8 @@
             // 
             // BtRemove
             // 
+            this.BtRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtRemove.ForeColor = System.Drawing.Color.Red;
             this.BtRemove.Location = new System.Drawing.Point(127, 89);
             this.BtRemove.Name = "BtRemove";
             this.BtRemove.Size = new System.Drawing.Size(22, 20);
@@ -135,6 +137,8 @@
             // 
             // BtAdd
             // 
+            this.BtAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtAdd.ForeColor = System.Drawing.Color.Green;
             this.BtAdd.Location = new System.Drawing.Point(127, 62);
             this.BtAdd.Name = "BtAdd";
             this.BtAdd.Size = new System.Drawing.Size(22, 20);
@@ -172,12 +176,13 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.label2.Location = new System.Drawing.Point(6, 16);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(392, 13);
+            this.label2.Size = new System.Drawing.Size(268, 13);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Entrez la liste de mots puis découvrez la liste de toutes les combinaisons possib" +
-    "les";
+            this.label2.Text = "Enter your words list and get all combinations.";
             // 
             // FormMain
             // 
