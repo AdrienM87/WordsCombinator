@@ -48,5 +48,28 @@ namespace WordsCombinator
             }
             return doc;
         }
+
+        public static List<string> getBackupedFilesInfosFromOneXMLConfig(XmlDocument doc, string idFolder)
+        {
+            List<string> listBackupElements = new List<string>();
+            try
+            {
+                if (doc.DocumentElement.HasChildNodes)
+                {
+                    foreach (XmlNode nodeWord in doc.DocumentElement)
+                    {
+                        if (listBackupElements.Contains(nodeWord.InnerXml) == false)
+                        {
+                            listBackupElements.Add(nodeWord.InnerXml);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return listBackupElements;
+        }
     }
 }
