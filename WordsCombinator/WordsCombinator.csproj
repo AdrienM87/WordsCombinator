@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassWordsCombinations.cs" />
+    <Compile Include="ClassXmlTreatments.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="microsoft_word_logo_moC_icon.ico" />
+    <Content Include="WordsList.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
