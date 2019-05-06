@@ -33,6 +33,20 @@ namespace WordsCombinator
     {
         private const string configDirPath = @"..\debug\";
 
-
+        public static XmlDocument chargeXMLFile(string path)
+        {
+            XmlDocument doc = new XmlDocument();
+            try
+            {
+                FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+                doc.Load(fs);
+                fs.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return doc;
+        }
     }
 }
