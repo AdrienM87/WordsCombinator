@@ -35,7 +35,12 @@ namespace WordsCombinator
         private const string xmlHeader = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n";
         private const string xmlRoot = "<root></root>\n";
 
-        public static XmlDocument openXMLFile(string path)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static XmlDocument OpenXMLFile(string path)
         {
             XmlDocument doc = new XmlDocument();
             try
@@ -43,8 +48,8 @@ namespace WordsCombinator
                 if (!File.Exists(path))
                 {
                     FileStream fs = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);                    
-                    fileStreamUTF8Writing(ref fs, xmlHeader);
-                    fileStreamUTF8Writing(ref fs, xmlRoot);
+                    FileStreamUTF8Writing(ref fs, xmlHeader);
+                    FileStreamUTF8Writing(ref fs, xmlRoot);
                     fs.Close();
                 }
 
@@ -59,7 +64,12 @@ namespace WordsCombinator
             return doc;
         }
 
-        private static void fileStreamUTF8Writing(ref FileStream fs, string text)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fs"></param>
+        /// <param name="text"></param>
+        private static void FileStreamUTF8Writing(ref FileStream fs, string text)
         {
             try
             {
@@ -74,11 +84,16 @@ namespace WordsCombinator
             }
         }
 
-        public static List<string> getWordsListFromFile(string path)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static List<string> GetWordsListFromFile(string path)
         {
             List<string> listBackupElements = new List<string>();
 
-            XmlDocument doc = openXMLFile(path);
+            XmlDocument doc = OpenXMLFile(path);
             try
             {
                 if (doc.DocumentElement.HasChildNodes)
@@ -99,9 +114,15 @@ namespace WordsCombinator
             return listBackupElements;
         }
 
-        public static void editWordsListFile(string path, string nodesName, List<string> wordsList)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="nodesName"></param>
+        /// <param name="wordsList"></param>
+        public static void EditWordsListFile(string path, string nodesName, List<string> wordsList)
         {
-            XmlDocument doc = openXMLFile(path);
+            XmlDocument doc = OpenXMLFile(path);
             try
             {
                 if (doc.DocumentElement.HasChildNodes)

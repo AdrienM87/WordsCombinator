@@ -31,6 +31,7 @@ namespace WordsCombinator
     public partial class FormMain : Form
     {
         #region Load
+
         private const string configFilePath = @"..\debug\WordsList.xml";
         private const string nodesName = "word";
 
@@ -40,37 +41,45 @@ namespace WordsCombinator
         {
             InitializeComponent();
 
-            chargeWordsList();
+            ChargeWordsList();
         }
 
-        private void chargeWordsList()
+        /// <summary>
+        /// Chargement de la liste des mots mémorisés dans le controle listbox dédié.
+        /// </summary>
+        private void ChargeWordsList()
         {
             try
             {
                 this.LstInitialWords.Items.Clear();
 
-                foreach (string word in ClassXmlTreatments.getWordsListFromFile(configFilePath))
+                foreach (string word in ClassXmlTreatments.GetWordsListFromFile(configFilePath))
                 {
                     this.LstInitialWords.Items.Add(word);
                 }
-                processCombinations();
+                ProcessCombinations();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
         }
+
         #endregion
 
         #region Process
-        private void processCombinations()
+
+        /// <summary>
+        /// Appel de la classe de calcul des combinaisons pour récupérer la liste et chargement dans le controle listbox dédié.
+        /// </summary>
+        private void ProcessCombinations()
         {
             this.Enabled = false;
             try
             {
                 if (this.LstInitialWords.Items.Count == 0) return;
 
-                listCombinations = ClassWordsCombinations.constructCombinationsList(this.LstInitialWords.Items.Cast<string>().ToList());
+                listCombinations = ClassWordsCombinations.ConstructCombinationsList(this.LstInitialWords.Items.Cast<string>().ToList());
 
                 this.LstResults.Items.AddRange(listCombinations.ToArray());
                 this.LbWords.Text = "Mots (" + this.LstInitialWords.Items.Count.ToString() + ") :";
@@ -83,7 +92,10 @@ namespace WordsCombinator
             this.Enabled = true;
         }
 
-        private void processAdding()
+        /// <summary>
+        /// Ajout d'un mot à la liste et traitement du nouveau résultat avec affichages.
+        /// </summary>
+        private void ProcessAdding()
         {
             try
             {
@@ -94,7 +106,7 @@ namespace WordsCombinator
                     this.TbInitialWords.Text = "";
                     this.TbInitialWords.Select();
 
-                    processCombinations();
+                    ProcessCombinations();
                 }
             }
             catch (Exception ex)
@@ -103,7 +115,10 @@ namespace WordsCombinator
             }
         }
 
-        private void processRemoving()
+        /// <summary>
+        /// Suppression d'un mot à la liste et traitement du nouveau résultat avec affichages.
+        /// </summary>
+        private void ProcessRemoving()
         {
             try
             {
@@ -115,7 +130,7 @@ namespace WordsCombinator
                         this.LstInitialWords.SelectedIndex = 0;
                     }
                 }
-                processCombinations();
+                ProcessCombinations();
             }
             catch (Exception ex)
             {
@@ -123,27 +138,36 @@ namespace WordsCombinator
             }
         }
 
-        private void processCopy()
+        /// <summary>
+        /// Copie de la liste des combinaisons dans le presse-papier.
+        /// </summary>
+        private void ProcessCopy()
         {
             try
             {
-                ClassWordsCombinations.copyStringListToClipboard(listCombinations);
+                ClassWordsCombinations.CopyStringListToClipboard(listCombinations);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
         }
+
         #endregion
 
         #region Keyboard
-        private void processCheckCopyKeys(KeyEventArgs e)
+
+        /// <summary>
+        /// Vérifie si le raccourci clavier Ctrl + C a été exécuté.
+        /// </summary>
+        /// <param name="e"></param>
+        private void ProcessCheckCopyKeys(KeyEventArgs e)
         {
             try
             {
                 if (e.Modifiers == Keys.Control && e.KeyCode == Keys.C)
                 {
-                    processCopy();
+                    ProcessCopy();
                 }
             }
             catch (Exception ex)
@@ -156,7 +180,7 @@ namespace WordsCombinator
         {
             try
             {
-                processCheckCopyKeys(e);
+                ProcessCheckCopyKeys(e);
             }
             catch (Exception ex)
             {
@@ -170,9 +194,9 @@ namespace WordsCombinator
             {
                 if (e.KeyCode == Keys.Enter)
                 {
-                    processAdding();
+                    ProcessAdding();
                 }
-                processCheckCopyKeys(e);
+                ProcessCheckCopyKeys(e);
             }
             catch (Exception ex)
             {
@@ -186,9 +210,9 @@ namespace WordsCombinator
             {
                 if (e.KeyCode == Keys.Delete)
                 {
-                    processRemoving();
+                    ProcessRemoving();
                 }
-                processCheckCopyKeys(e);
+                ProcessCheckCopyKeys(e);
             }
             catch (Exception ex)
             {
@@ -200,13 +224,14 @@ namespace WordsCombinator
         {
             try
             {
-                processCheckCopyKeys(e);
+                ProcessCheckCopyKeys(e);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
         }
+
         #endregion
 
         #region Buttons
@@ -214,7 +239,7 @@ namespace WordsCombinator
         {
             try
             {
-                processAdding();
+                ProcessAdding();
             }
             catch (Exception ex)
             {
@@ -226,7 +251,7 @@ namespace WordsCombinator
         {
             try
             {
-                processRemoving();
+                ProcessRemoving();
             }
             catch (Exception ex)
             {
@@ -238,7 +263,7 @@ namespace WordsCombinator
         {
             try
             {
-                processCopy();
+                ProcessCopy();
             }
             catch (Exception ex)
             {
@@ -270,7 +295,7 @@ namespace WordsCombinator
                     listWords.Add((string)item);
                 }
 
-                ClassXmlTreatments.editWordsListFile(configFilePath, nodesName, listWords);
+                ClassXmlTreatments.EditWordsListFile(configFilePath, nodesName, listWords);
 
                 Application.Exit();
             }

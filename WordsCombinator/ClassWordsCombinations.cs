@@ -33,7 +33,7 @@ namespace WordsCombinator
         /// Receive a string list to copy them to clipboard separated by end lines.
         /// </summary>
         /// <param name="listString"></param>
-        public static void copyStringListToClipboard(List<string> listString)
+        public static void CopyStringListToClipboard(List<string> listString)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace WordsCombinator
         /// </summary>
         /// <param name="listWords"></param>
         /// <returns></returns>
-        public static List<string> constructCombinationsList(List<string> listWords)
+        public static List<string> ConstructCombinationsList(List<string> listWords)
         {
             List<string> listCombinations = new List<string>();
             try
