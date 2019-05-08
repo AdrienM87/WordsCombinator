@@ -31,14 +31,15 @@ namespace WordsCombinator
 {
     public static class ClassXmlTreatments
     {
-        private const string configDirPath = @"..\debug\";
+        private const string configFilePath = @"..\debug\WordsList.xml";
+        private const string nodesName = "word";
 
-        public static XmlDocument chargeXMLFile(string path)
+        public static XmlDocument openXMLFile(string path)
         {
             XmlDocument doc = new XmlDocument();
             try
             {
-                FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+                FileStream fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite);
                 doc.Load(fs);
                 fs.Close();
             }
@@ -49,7 +50,7 @@ namespace WordsCombinator
             return doc;
         }
 
-        public static List<string> getBackupedFilesInfosFromOneXMLConfig(XmlDocument doc, string idFolder)
+        public static List<string> getWordsListFromFile(XmlDocument doc, string idFolder)
         {
             List<string> listBackupElements = new List<string>();
             try
@@ -70,6 +71,30 @@ namespace WordsCombinator
                 MessageBox.Show(ex.ToString());
             }
             return listBackupElements;
+        }
+
+        public static void editWordsListFile(XmlDocument doc, List<string> wordsList)
+        {
+            try
+            {
+                if (doc.DocumentElement.HasChildNodes)
+                {
+                    doc.DocumentElement.RemoveAll();
+                }
+                foreach (string word in wordsList)
+                {
+
+                    XmlElement wordElement = doc.CreateElement(nodesName);
+                    wordElement.InnerXml = word;
+
+                    doc.DocumentElement.AppendChild(wordElement);
+                }
+                doc.Save(configFilePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
