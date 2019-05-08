@@ -53,6 +53,7 @@ namespace WordsCombinator
                 {
                     this.LstInitialWords.Items.Add(word);
                 }
+                processCombinations();
             }
             catch (Exception ex)
             {
@@ -67,6 +68,8 @@ namespace WordsCombinator
             this.Enabled = false;
             try
             {
+                if (this.LstInitialWords.Items.Count == 0) return;
+
                 listCombinations = ClassWordsCombinations.constructCombinationsList(this.LstInitialWords.Items.Cast<string>().ToList());
 
                 this.LstResults.Items.AddRange(listCombinations.ToArray());
