@@ -31,11 +31,33 @@ namespace WordsCombinator
     public partial class FormMain : Form
     {
         #region Load
+        private const string configFilePath = @"..\debug\WordsList.xml";
+        private const string nodesName = "word";
+
         List<string> listCombinations = new List<string>();
 
         public FormMain()
         {
             InitializeComponent();
+
+            chargeWordsList();
+        }
+
+        private void chargeWordsList()
+        {
+            try
+            {
+                this.LstInitialWords.Items.Clear();
+
+                foreach (string word in ClassXmlTreatments.getWordsListFromFile(configFilePath))
+                {
+                    this.LstInitialWords.Items.Add(word);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
         #endregion
 
@@ -234,10 +256,19 @@ namespace WordsCombinator
             }
         }
 
-        private void BtQuit_Click(object sender, EventArgs e)
+        private void BtQuitSave_Click(object sender, EventArgs e)
         {
             try
             {
+                List<string> listWords = new List<string>();
+
+                foreach (object item in this.LstInitialWords.Items)
+                {
+                    listWords.Add((string)item);
+                }
+
+                ClassXmlTreatments.editWordsListFile(configFilePath, nodesName, listWords);
+
                 Application.Exit();
             }
             catch (Exception ex)

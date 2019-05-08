@@ -24,6 +24,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -31,17 +32,25 @@ namespace WordsCombinator
 {
     public static class ClassXmlTreatments
     {
-        private const string configFilePath = @"..\debug\WordsList.xml";
-        private const string nodesName = "word";
+        private const string xmlHeader = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n";
+        private const string xmlRoot = "<root></root>\n";
 
         public static XmlDocument openXMLFile(string path)
         {
             XmlDocument doc = new XmlDocument();
             try
             {
-                FileStream fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite);
-                doc.Load(fs);
-                fs.Close();
+                if (!File.Exists(path))
+                {
+                    FileStream fs = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);                    
+                    fileStreamUTF8Writing(ref fs, xmlHeader);
+                    fileStreamUTF8Writing(ref fs, xmlRoot);
+                    fs.Close();
+                }
+
+                FileStream xmlStream = new FileStream(path, FileMode.Open, FileAccess.ReadWrite);
+                doc.Load(xmlStream);
+                xmlStream.Close();
             }
             catch (Exception ex)
             {
@@ -50,9 +59,26 @@ namespace WordsCombinator
             return doc;
         }
 
-        public static List<string> getWordsListFromFile(XmlDocument doc, string idFolder)
+        private static void fileStreamUTF8Writing(ref FileStream fs, string text)
+        {
+            try
+            {
+                foreach (byte b in Encoding.UTF8.GetBytes(text))
+                {
+                    fs.WriteByte(b);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        public static List<string> getWordsListFromFile(string path)
         {
             List<string> listBackupElements = new List<string>();
+
+            XmlDocument doc = openXMLFile(path);
             try
             {
                 if (doc.DocumentElement.HasChildNodes)
@@ -73,8 +99,9 @@ namespace WordsCombinator
             return listBackupElements;
         }
 
-        public static void editWordsListFile(XmlDocument doc, List<string> wordsList)
+        public static void editWordsListFile(string path, string nodesName, List<string> wordsList)
         {
+            XmlDocument doc = openXMLFile(path);
             try
             {
                 if (doc.DocumentElement.HasChildNodes)
@@ -89,7 +116,7 @@ namespace WordsCombinator
 
                     doc.DocumentElement.AppendChild(wordElement);
                 }
-                doc.Save(configFilePath);
+                doc.Save(path);
             }
             catch (Exception ex)
             {

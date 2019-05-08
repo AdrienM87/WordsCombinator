@@ -55,7 +55,7 @@ namespace WordsCombinator
             this.label1 = new System.Windows.Forms.Label();
             this.GbAlpha = new System.Windows.Forms.GroupBox();
             this.BtCopy = new System.Windows.Forms.Button();
-            this.BtQuit = new System.Windows.Forms.Button();
+            this.BtQuitSave = new System.Windows.Forms.Button();
             this.BtClearInitialWords = new System.Windows.Forms.Button();
             this.LbCombinations = new System.Windows.Forms.Label();
             this.LstResults = new System.Windows.Forms.ListBox();
@@ -79,7 +79,7 @@ namespace WordsCombinator
             // GbAlpha
             // 
             this.GbAlpha.Controls.Add(this.BtCopy);
-            this.GbAlpha.Controls.Add(this.BtQuit);
+            this.GbAlpha.Controls.Add(this.BtQuitSave);
             this.GbAlpha.Controls.Add(this.BtClearInitialWords);
             this.GbAlpha.Controls.Add(this.LbCombinations);
             this.GbAlpha.Controls.Add(this.LstResults);
@@ -101,22 +101,22 @@ namespace WordsCombinator
             this.BtCopy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.BtCopy.Location = new System.Drawing.Point(195, 289);
             this.BtCopy.Name = "BtCopy";
-            this.BtCopy.Size = new System.Drawing.Size(100, 31);
+            this.BtCopy.Size = new System.Drawing.Size(79, 31);
             this.BtCopy.TabIndex = 11;
             this.BtCopy.Text = "Copy";
             this.BtCopy.UseVisualStyleBackColor = true;
             this.BtCopy.Click += new System.EventHandler(this.BtCopy_Click);
             // 
-            // BtQuit
+            // BtQuitSave
             // 
-            this.BtQuit.ForeColor = System.Drawing.Color.Red;
-            this.BtQuit.Location = new System.Drawing.Point(327, 289);
-            this.BtQuit.Name = "BtQuit";
-            this.BtQuit.Size = new System.Drawing.Size(62, 31);
-            this.BtQuit.TabIndex = 10;
-            this.BtQuit.Text = "Quit";
-            this.BtQuit.UseVisualStyleBackColor = true;
-            this.BtQuit.Click += new System.EventHandler(this.BtQuit_Click);
+            this.BtQuitSave.ForeColor = System.Drawing.Color.Red;
+            this.BtQuitSave.Location = new System.Drawing.Point(310, 289);
+            this.BtQuitSave.Name = "BtQuitSave";
+            this.BtQuitSave.Size = new System.Drawing.Size(79, 31);
+            this.BtQuitSave.TabIndex = 10;
+            this.BtQuitSave.Text = "Quit + Save";
+            this.BtQuitSave.UseVisualStyleBackColor = true;
+            this.BtQuitSave.Click += new System.EventHandler(this.BtQuitSave_Click);
             // 
             // BtClearInitialWords
             // 
@@ -229,7 +229,7 @@ namespace WordsCombinator
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox GbAlpha;
-        private System.Windows.Forms.Button BtQuit;
+        private System.Windows.Forms.Button BtQuitSave;
         private System.Windows.Forms.Button BtClearInitialWords;
         private System.Windows.Forms.Label LbCombinations;
         private System.Windows.Forms.ListBox LstResults;
