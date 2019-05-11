@@ -41,23 +41,22 @@ namespace WordsCombinator
         {
             InitializeComponent();
 
-            ChargeWordsList();
+            ChargeWordsLists();
         }
 
         /// <summary>
         /// Chargement de la liste des mots mémorisés dans le controle listbox dédié.
         /// </summary>
-        private void ChargeWordsList()
+        private void ChargeWordsLists()
         {
             try
             {
                 this.LstInitialWords.Items.Clear();
+                this.CbWordsLists.Items.Clear();
+                this.CbWordsLists.Items.Add("New");
 
-                foreach (string word in ClassXmlTreatments.GetWordsListsFromFile(configFilePath).Values.First())
-                {
-                    this.LstInitialWords.Items.Add(word);
-                }
-                ProcessCombinations();
+                string[] wordsLists = ClassXmlTreatments.GetWordsListsFromFile(configFilePath).Keys.ToArray();
+                this.CbWordsLists.Items.AddRange(wordsLists);
             }
             catch (Exception ex)
             {
@@ -81,6 +80,7 @@ namespace WordsCombinator
 
                 listCombinations = ClassWordsCombinations.ConstructCombinationsList(this.LstInitialWords.Items.Cast<string>().ToList());
 
+                this.LstResults.Items.Clear();
                 this.LstResults.Items.AddRange(listCombinations.ToArray());
                 this.LbWords.Text = "Mots (" + this.LstInitialWords.Items.Count.ToString() + ") :";
                 this.LbCombinations.Text = "Combinaisons (" + this.listCombinations.Count.ToString() + ") :";
@@ -235,6 +235,28 @@ namespace WordsCombinator
         #endregion
 
         #region Buttons
+
+        private void CbWordsLists_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                this.LstInitialWords.Items.Clear();
+
+                //chargement dans la listbox du contenu sélectionné
+                if (this.CbWordsLists.SelectedItem.ToString() != "New")
+                {
+                    string[] wordsList = ClassXmlTreatments.GetWordsListsFromFile(configFilePath)[this.CbWordsLists.SelectedItem.ToString()].ToArray();
+
+                    this.LstInitialWords.Items.AddRange(wordsList);
+                    ProcessCombinations();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
         private void BtAdd_Click(object sender, EventArgs e)
         {
             try
@@ -304,6 +326,9 @@ namespace WordsCombinator
                 MessageBox.Show(ex.ToString());
             }
         }
+
         #endregion
+
+
     }
 }
