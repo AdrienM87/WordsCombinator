@@ -54,13 +54,8 @@ namespace WordsCombinator
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.label1 = new System.Windows.Forms.Label();
             this.GbAlpha = new System.Windows.Forms.GroupBox();
-            this.BtCopy = new System.Windows.Forms.Button();
-            this.BtQuitSave = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.LbCombinations = new System.Windows.Forms.Label();
-            this.LstResults = new System.Windows.Forms.ListBox();
             this.CbWordsLists = new System.Windows.Forms.ComboBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.GbWords = new System.Windows.Forms.GroupBox();
             this.BtRemove = new System.Windows.Forms.Button();
             this.BtAdd = new System.Windows.Forms.Button();
@@ -68,6 +63,11 @@ namespace WordsCombinator
             this.LbWords = new System.Windows.Forms.Label();
             this.TbInitialWords = new System.Windows.Forms.TextBox();
             this.BtClearInitialWords = new System.Windows.Forms.Button();
+            this.LbCombinations = new System.Windows.Forms.Label();
+            this.LstResults = new System.Windows.Forms.ListBox();
+            this.BtCopy = new System.Windows.Forms.Button();
+            this.BtQuitSave = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.GbAlpha.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.GbWords.SuspendLayout();
@@ -91,6 +91,122 @@ namespace WordsCombinator
             this.GbAlpha.Size = new System.Drawing.Size(427, 359);
             this.GbAlpha.TabIndex = 1;
             this.GbAlpha.TabStop = false;
+            // 
+            // CbWordsLists
+            // 
+            this.CbWordsLists.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbWordsLists.FormattingEnabled = true;
+            this.CbWordsLists.Location = new System.Drawing.Point(290, 19);
+            this.CbWordsLists.Name = "CbWordsLists";
+            this.CbWordsLists.Size = new System.Drawing.Size(121, 21);
+            this.CbWordsLists.TabIndex = 13;
+            this.CbWordsLists.SelectedIndexChanged += new System.EventHandler(this.CbWordsLists_SelectedIndexChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.GbWords);
+            this.groupBox1.Controls.Add(this.LbCombinations);
+            this.groupBox1.Controls.Add(this.LstResults);
+            this.groupBox1.Controls.Add(this.BtCopy);
+            this.groupBox1.Controls.Add(this.BtQuitSave);
+            this.groupBox1.Location = new System.Drawing.Point(9, 46);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(402, 303);
+            this.groupBox1.TabIndex = 12;
+            this.groupBox1.TabStop = false;
+            // 
+            // GbWords
+            // 
+            this.GbWords.Controls.Add(this.BtRemove);
+            this.GbWords.Controls.Add(this.BtAdd);
+            this.GbWords.Controls.Add(this.LstInitialWords);
+            this.GbWords.Controls.Add(this.LbWords);
+            this.GbWords.Controls.Add(this.TbInitialWords);
+            this.GbWords.Controls.Add(this.BtClearInitialWords);
+            this.GbWords.Location = new System.Drawing.Point(6, 19);
+            this.GbWords.Name = "GbWords";
+            this.GbWords.Size = new System.Drawing.Size(162, 268);
+            this.GbWords.TabIndex = 14;
+            this.GbWords.TabStop = false;
+            // 
+            // BtRemove
+            // 
+            this.BtRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtRemove.ForeColor = System.Drawing.Color.Red;
+            this.BtRemove.Location = new System.Drawing.Point(123, 62);
+            this.BtRemove.Name = "BtRemove";
+            this.BtRemove.Size = new System.Drawing.Size(22, 20);
+            this.BtRemove.TabIndex = 24;
+            this.BtRemove.Text = "-";
+            this.BtRemove.UseVisualStyleBackColor = true;
+            this.BtRemove.Click += new System.EventHandler(this.BtRemove_Click);
+            // 
+            // BtAdd
+            // 
+            this.BtAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtAdd.ForeColor = System.Drawing.Color.Green;
+            this.BtAdd.Location = new System.Drawing.Point(123, 35);
+            this.BtAdd.Name = "BtAdd";
+            this.BtAdd.Size = new System.Drawing.Size(22, 20);
+            this.BtAdd.TabIndex = 23;
+            this.BtAdd.Text = "+";
+            this.BtAdd.UseVisualStyleBackColor = true;
+            this.BtAdd.Click += new System.EventHandler(this.BtAdd_Click);
+            // 
+            // LstInitialWords
+            // 
+            this.LstInitialWords.FormattingEnabled = true;
+            this.LstInitialWords.Location = new System.Drawing.Point(16, 62);
+            this.LstInitialWords.Name = "LstInitialWords";
+            this.LstInitialWords.Size = new System.Drawing.Size(100, 160);
+            this.LstInitialWords.TabIndex = 22;
+            this.LstInitialWords.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LstInitialWords_KeyDown);
+            // 
+            // LbWords
+            // 
+            this.LbWords.AutoSize = true;
+            this.LbWords.Location = new System.Drawing.Point(16, 16);
+            this.LbWords.Name = "LbWords";
+            this.LbWords.Size = new System.Drawing.Size(44, 13);
+            this.LbWords.TabIndex = 21;
+            this.LbWords.Text = "Words :";
+            // 
+            // TbInitialWords
+            // 
+            this.TbInitialWords.Location = new System.Drawing.Point(16, 35);
+            this.TbInitialWords.Name = "TbInitialWords";
+            this.TbInitialWords.Size = new System.Drawing.Size(100, 20);
+            this.TbInitialWords.TabIndex = 20;
+            this.TbInitialWords.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbInitialWords_KeyDown);
+            // 
+            // BtClearInitialWords
+            // 
+            this.BtClearInitialWords.Location = new System.Drawing.Point(16, 228);
+            this.BtClearInitialWords.Name = "BtClearInitialWords";
+            this.BtClearInitialWords.Size = new System.Drawing.Size(100, 31);
+            this.BtClearInitialWords.TabIndex = 19;
+            this.BtClearInitialWords.Text = "Clear";
+            this.BtClearInitialWords.UseVisualStyleBackColor = true;
+            this.BtClearInitialWords.Click += new System.EventHandler(this.BtClearInitialWords_Click);
+            // 
+            // LbCombinations
+            // 
+            this.LbCombinations.AutoSize = true;
+            this.LbCombinations.Location = new System.Drawing.Point(187, 22);
+            this.LbCombinations.Name = "LbCombinations";
+            this.LbCombinations.Size = new System.Drawing.Size(76, 13);
+            this.LbCombinations.TabIndex = 13;
+            this.LbCombinations.Text = "Combinations :";
+            // 
+            // LstResults
+            // 
+            this.LstResults.FormattingEnabled = true;
+            this.LstResults.Location = new System.Drawing.Point(187, 41);
+            this.LstResults.Name = "LstResults";
+            this.LstResults.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.LstResults.Size = new System.Drawing.Size(194, 199);
+            this.LstResults.TabIndex = 12;
+            this.LstResults.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LstResults_KeyDown);
             // 
             // BtCopy
             // 
@@ -125,115 +241,6 @@ namespace WordsCombinator
             this.label2.Size = new System.Drawing.Size(280, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "Choose your words list and get all combinations.";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.GbWords);
-            this.groupBox1.Controls.Add(this.LbCombinations);
-            this.groupBox1.Controls.Add(this.LstResults);
-            this.groupBox1.Controls.Add(this.BtCopy);
-            this.groupBox1.Controls.Add(this.BtQuitSave);
-            this.groupBox1.Location = new System.Drawing.Point(9, 46);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(402, 303);
-            this.groupBox1.TabIndex = 12;
-            this.groupBox1.TabStop = false;
-            // 
-            // LbCombinations
-            // 
-            this.LbCombinations.AutoSize = true;
-            this.LbCombinations.Location = new System.Drawing.Point(187, 22);
-            this.LbCombinations.Name = "LbCombinations";
-            this.LbCombinations.Size = new System.Drawing.Size(76, 13);
-            this.LbCombinations.TabIndex = 13;
-            this.LbCombinations.Text = "Combinations :";
-            // 
-            // LstResults
-            // 
-            this.LstResults.FormattingEnabled = true;
-            this.LstResults.Location = new System.Drawing.Point(187, 41);
-            this.LstResults.Name = "LstResults";
-            this.LstResults.Size = new System.Drawing.Size(194, 199);
-            this.LstResults.TabIndex = 12;
-            // 
-            // CbWordsLists
-            // 
-            this.CbWordsLists.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CbWordsLists.FormattingEnabled = true;
-            this.CbWordsLists.Location = new System.Drawing.Point(290, 19);
-            this.CbWordsLists.Name = "CbWordsLists";
-            this.CbWordsLists.Size = new System.Drawing.Size(121, 21);
-            this.CbWordsLists.TabIndex = 13;
-            this.CbWordsLists.SelectedIndexChanged += new System.EventHandler(this.CbWordsLists_SelectedIndexChanged);
-            // 
-            // GbWords
-            // 
-            this.GbWords.Controls.Add(this.BtRemove);
-            this.GbWords.Controls.Add(this.BtAdd);
-            this.GbWords.Controls.Add(this.LstInitialWords);
-            this.GbWords.Controls.Add(this.LbWords);
-            this.GbWords.Controls.Add(this.TbInitialWords);
-            this.GbWords.Controls.Add(this.BtClearInitialWords);
-            this.GbWords.Location = new System.Drawing.Point(6, 19);
-            this.GbWords.Name = "GbWords";
-            this.GbWords.Size = new System.Drawing.Size(162, 268);
-            this.GbWords.TabIndex = 14;
-            this.GbWords.TabStop = false;
-            // 
-            // BtRemove
-            // 
-            this.BtRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtRemove.ForeColor = System.Drawing.Color.Red;
-            this.BtRemove.Location = new System.Drawing.Point(123, 62);
-            this.BtRemove.Name = "BtRemove";
-            this.BtRemove.Size = new System.Drawing.Size(22, 20);
-            this.BtRemove.TabIndex = 24;
-            this.BtRemove.Text = "-";
-            this.BtRemove.UseVisualStyleBackColor = true;
-            // 
-            // BtAdd
-            // 
-            this.BtAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtAdd.ForeColor = System.Drawing.Color.Green;
-            this.BtAdd.Location = new System.Drawing.Point(123, 35);
-            this.BtAdd.Name = "BtAdd";
-            this.BtAdd.Size = new System.Drawing.Size(22, 20);
-            this.BtAdd.TabIndex = 23;
-            this.BtAdd.Text = "+";
-            this.BtAdd.UseVisualStyleBackColor = true;
-            // 
-            // LstInitialWords
-            // 
-            this.LstInitialWords.FormattingEnabled = true;
-            this.LstInitialWords.Location = new System.Drawing.Point(16, 62);
-            this.LstInitialWords.Name = "LstInitialWords";
-            this.LstInitialWords.Size = new System.Drawing.Size(100, 160);
-            this.LstInitialWords.TabIndex = 22;
-            // 
-            // LbWords
-            // 
-            this.LbWords.AutoSize = true;
-            this.LbWords.Location = new System.Drawing.Point(16, 16);
-            this.LbWords.Name = "LbWords";
-            this.LbWords.Size = new System.Drawing.Size(44, 13);
-            this.LbWords.TabIndex = 21;
-            this.LbWords.Text = "Words :";
-            // 
-            // TbInitialWords
-            // 
-            this.TbInitialWords.Location = new System.Drawing.Point(16, 35);
-            this.TbInitialWords.Name = "TbInitialWords";
-            this.TbInitialWords.Size = new System.Drawing.Size(100, 20);
-            this.TbInitialWords.TabIndex = 20;
-            // 
-            // BtClearInitialWords
-            // 
-            this.BtClearInitialWords.Location = new System.Drawing.Point(16, 228);
-            this.BtClearInitialWords.Name = "BtClearInitialWords";
-            this.BtClearInitialWords.Size = new System.Drawing.Size(100, 31);
-            this.BtClearInitialWords.TabIndex = 19;
-            this.BtClearInitialWords.Text = "Clear";
-            this.BtClearInitialWords.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 

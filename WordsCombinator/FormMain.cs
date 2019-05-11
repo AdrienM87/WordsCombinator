@@ -310,14 +310,14 @@ namespace WordsCombinator
         {
             try
             {
-                //List<string> listWords = new List<string>();
+                List<string> listWords = new List<string>();
 
-                //foreach (object item in this.LstInitialWords.Items)
-                //{
-                //    listWords.Add((string)item);
-                //}
+                foreach (object item in this.LstInitialWords.Items)
+                {
+                    listWords.Add((string)item);
+                }
 
-                //ClassXmlTreatments.EditWordsListFile(configFilePath, nodesName, listWords);
+                ClassXmlTreatments.EditWordsListFile(configFilePath, nodesName, listWords);
 
                 Application.Exit();
             }
@@ -328,7 +328,5 @@ namespace WordsCombinator
         }
 
         #endregion
-
-
     }
 }
