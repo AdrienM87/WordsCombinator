@@ -40,7 +40,7 @@ namespace WordsCombinator
 
 
         /// <summary>
-        /// 
+        /// Ouvre ou par défaut créé un fichier Xml avec le minimum nécessaire.
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
@@ -69,7 +69,7 @@ namespace WordsCombinator
         }
 
         /// <summary>
-        /// 
+        /// Ecrit dans le flux le texte spécifié encodé en UTF8.
         /// </summary>
         /// <param name="fs"></param>
         /// <param name="text"></param>
@@ -88,6 +88,11 @@ namespace WordsCombinator
             }
         }
 
+        /// <summary>
+        /// Récupère l'ensemble des listes de mots et de leur contenu et renvoie un dictionnaire.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static Dictionary<string, List<string>> GetWordsListsFromFile(string path)
         {
             Dictionary<string, List<string>> dicoWordsLists = new Dictionary<string, List<string>>();
@@ -114,7 +119,7 @@ namespace WordsCombinator
         }
 
         /// <summary>
-        /// 
+        /// Récupère tout le contenu d'une liste de mots spécifiée.
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
@@ -142,7 +147,7 @@ namespace WordsCombinator
         }
 
         /// <summary>
-        /// 
+        /// Sauvegarde en fichier XML de tous les changements des listes ou de leur contenu effectués sur l'interface.
         /// </summary>
         /// <param name="path"></param>
         /// <param name="nodesName"></param>
