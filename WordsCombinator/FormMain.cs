@@ -341,6 +341,23 @@ namespace WordsCombinator
             }
         }
 
+        private void BtRemoveList_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (wordsLists.ContainsKey(this.CbWordsLists.Text))
+                {                
+                    wordsLists.Remove(this.CbWordsLists.Text);
+                    this.CbWordsLists.Items.Remove(this.CbWordsLists.Text);
+                    this.CbWordsLists.SelectedIndex = this.CbWordsLists.Items.IndexOf(NEW);
+                }                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
         private void BtCopy_Click(object sender, EventArgs e)
         {
             try

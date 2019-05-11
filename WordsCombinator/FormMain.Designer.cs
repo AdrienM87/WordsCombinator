@@ -68,6 +68,7 @@ namespace WordsCombinator
             this.BtCopy = new System.Windows.Forms.Button();
             this.BtQuitSave = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.BtRemoveList = new System.Windows.Forms.Button();
             this.GbAlpha.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.GbWords.SuspendLayout();
@@ -83,21 +84,22 @@ namespace WordsCombinator
             // 
             // GbAlpha
             // 
+            this.GbAlpha.Controls.Add(this.BtRemoveList);
             this.GbAlpha.Controls.Add(this.CbWordsLists);
             this.GbAlpha.Controls.Add(this.groupBox1);
             this.GbAlpha.Controls.Add(this.label2);
             this.GbAlpha.Location = new System.Drawing.Point(12, 12);
             this.GbAlpha.Name = "GbAlpha";
-            this.GbAlpha.Size = new System.Drawing.Size(427, 359);
+            this.GbAlpha.Size = new System.Drawing.Size(427, 390);
             this.GbAlpha.TabIndex = 1;
             this.GbAlpha.TabStop = false;
             // 
             // CbWordsLists
             // 
             this.CbWordsLists.FormattingEnabled = true;
-            this.CbWordsLists.Location = new System.Drawing.Point(290, 19);
+            this.CbWordsLists.Location = new System.Drawing.Point(31, 49);
             this.CbWordsLists.Name = "CbWordsLists";
-            this.CbWordsLists.Size = new System.Drawing.Size(121, 21);
+            this.CbWordsLists.Size = new System.Drawing.Size(143, 21);
             this.CbWordsLists.TabIndex = 13;
             this.CbWordsLists.SelectedIndexChanged += new System.EventHandler(this.CbWordsLists_SelectedIndexChanged);
             this.CbWordsLists.TextChanged += new System.EventHandler(this.CbWordsLists_TextChanged);
@@ -109,7 +111,7 @@ namespace WordsCombinator
             this.groupBox1.Controls.Add(this.LstResults);
             this.groupBox1.Controls.Add(this.BtCopy);
             this.groupBox1.Controls.Add(this.BtQuitSave);
-            this.groupBox1.Location = new System.Drawing.Point(9, 46);
+            this.groupBox1.Location = new System.Drawing.Point(9, 76);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(402, 303);
             this.groupBox1.TabIndex = 12;
@@ -242,11 +244,23 @@ namespace WordsCombinator
             this.label2.TabIndex = 0;
             this.label2.Text = "Choose your words list and get all combinations.";
             // 
+            // BtRemoveList
+            // 
+            this.BtRemoveList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtRemoveList.ForeColor = System.Drawing.Color.Red;
+            this.BtRemoveList.Location = new System.Drawing.Point(193, 49);
+            this.BtRemoveList.Name = "BtRemoveList";
+            this.BtRemoveList.Size = new System.Drawing.Size(22, 20);
+            this.BtRemoveList.TabIndex = 25;
+            this.BtRemoveList.Text = "X";
+            this.BtRemoveList.UseVisualStyleBackColor = true;
+            this.BtRemoveList.Click += new System.EventHandler(this.BtRemoveList_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450, 382);
+            this.ClientSize = new System.Drawing.Size(450, 410);
             this.Controls.Add(this.GbAlpha);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -282,6 +296,7 @@ namespace WordsCombinator
         private System.Windows.Forms.Label LbWords;
         private System.Windows.Forms.TextBox TbInitialWords;
         private System.Windows.Forms.Button BtClearInitialWords;
+        private System.Windows.Forms.Button BtRemoveList;
     }
 }
 
