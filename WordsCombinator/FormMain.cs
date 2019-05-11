@@ -162,6 +162,24 @@ namespace WordsCombinator
             }
         }
 
+        /// <summary>
+        /// Effacement du contenu des contrôles d'affichage des résultats
+        /// </summary>
+        private void ProcessClearing()
+        {
+            try
+            {
+                this.LstInitialWords.Items.Clear();
+                this.LstResults.Items.Clear();
+                this.LbCombinations.Text = "";
+                this.LbWords.Text = "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
         #endregion
 
         #region Keyboard
@@ -249,12 +267,15 @@ namespace WordsCombinator
         {
             try
             {
-                listSelected = this.CbWordsLists.SelectedText;
-                this.LstInitialWords.Items.Clear();
+                listSelected = this.CbWordsLists.Text;
+                
+                if (this.CbWordsLists.Text == NEW || this.CbWordsLists.Text == "")
+                {
+                    ProcessClearing();
+                    return;
+                }
 
                 //chargement dans la listbox du contenu sélectionné
-                if (this.CbWordsLists.Text == NEW || this.CbWordsLists.Text == "") return;
-
                 string[] oneList = wordsLists[this.CbWordsLists.Text].ToArray();
 
                 this.LstInitialWords.Items.AddRange(oneList);
@@ -270,11 +291,13 @@ namespace WordsCombinator
         {
             try
             {
-                if (listSelected == null || listSelected == "" || listSelected == this.CbWordsLists.SelectedText) return;
-
+                if (listSelected == null || listSelected == "" || listSelected == this.CbWordsLists.Text || wordsLists.ContainsKey(this.CbWordsLists.Text)) return;
+                
                 List<string> oneList = wordsLists[listSelected];
                 wordsLists.Remove(listSelected);
-                wordsLists.Add(this.CbWordsLists.Text, oneList);
+
+                listSelected = this.CbWordsLists.Text;
+                wordsLists.Add(listSelected, oneList);
             }
             catch (Exception ex)
             {
@@ -322,8 +345,7 @@ namespace WordsCombinator
         {
             try
             {
-                this.LstInitialWords.Items.Clear();
-                this.LstResults.Items.Clear();
+                ProcessClearing();
             }
             catch (Exception ex)
             {
