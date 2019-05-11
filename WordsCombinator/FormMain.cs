@@ -33,8 +33,9 @@ namespace WordsCombinator
         #region Load
 
         private const string configFilePath = @"..\debug\WordsList.xml";
-        private const string nodesName = "word";
+        private const string NEW = "New";
 
+        Dictionary<string, List<string>> wordsLists;
         List<string> listCombinations = new List<string>();
 
         public FormMain()
@@ -51,12 +52,15 @@ namespace WordsCombinator
         {
             try
             {
+                wordsLists = ClassXmlTreatments.GetWordsListsFromFile(configFilePath);
+                if (!wordsLists.ContainsKey(NEW)) wordsLists.Add(NEW, new List<string>());
+
                 this.LstInitialWords.Items.Clear();
                 this.CbWordsLists.Items.Clear();
-                this.CbWordsLists.Items.Add("New");
 
-                string[] wordsLists = ClassXmlTreatments.GetWordsListsFromFile(configFilePath).Keys.ToArray();
-                this.CbWordsLists.Items.AddRange(wordsLists);
+                string[] listsNames = wordsLists.Keys.ToArray();
+                this.CbWordsLists.Items.AddRange(listsNames);
+                this.CbWordsLists.SelectedItem = NEW;
             }
             catch (Exception ex)
             {
@@ -73,10 +77,10 @@ namespace WordsCombinator
         /// </summary>
         private void ProcessCombinations()
         {
-            this.Enabled = false;
             try
             {
                 if (this.LstInitialWords.Items.Count == 0) return;
+                this.Enabled = false;
 
                 listCombinations = ClassWordsCombinations.ConstructCombinationsList(this.LstInitialWords.Items.Cast<string>().ToList());
 
@@ -102,6 +106,8 @@ namespace WordsCombinator
                 if (this.TbInitialWords.Text != "" &&
                     this.LstInitialWords.Items.Cast<string>().ToList().Contains(this.TbInitialWords.Text) == false)
                 {
+                    wordsLists[this.CbWordsLists.SelectedItem.ToString()].Add(this.TbInitialWords.Text);
+
                     this.LstInitialWords.Items.Add(this.TbInitialWords.Text);
                     this.TbInitialWords.Text = "";
                     this.TbInitialWords.Select();
@@ -124,6 +130,8 @@ namespace WordsCombinator
             {
                 if (this.LstInitialWords.SelectedIndex != -1)
                 {
+                    wordsLists[this.CbWordsLists.SelectedItem.ToString()].Remove(this.LstInitialWords.SelectedItem.ToString());
+
                     this.LstInitialWords.Items.RemoveAt(this.LstInitialWords.SelectedIndex);
                     if (this.LstInitialWords.Items.Count != 0)
                     {
@@ -243,11 +251,11 @@ namespace WordsCombinator
                 this.LstInitialWords.Items.Clear();
 
                 //chargement dans la listbox du contenu sélectionné
-                if (this.CbWordsLists.SelectedItem.ToString() != "New")
+                if (this.CbWordsLists.SelectedItem.ToString() != NEW)
                 {
-                    string[] wordsList = ClassXmlTreatments.GetWordsListsFromFile(configFilePath)[this.CbWordsLists.SelectedItem.ToString()].ToArray();
+                    string[] oneList = wordsLists[this.CbWordsLists.SelectedItem.ToString()].ToArray();
 
-                    this.LstInitialWords.Items.AddRange(wordsList);
+                    this.LstInitialWords.Items.AddRange(oneList);
                     ProcessCombinations();
                 }
             }
@@ -310,14 +318,7 @@ namespace WordsCombinator
         {
             try
             {
-                List<string> listWords = new List<string>();
-
-                foreach (object item in this.LstInitialWords.Items)
-                {
-                    listWords.Add((string)item);
-                }
-
-                ClassXmlTreatments.EditWordsListFile(configFilePath, nodesName, listWords);
+                ClassXmlTreatments.EditWordsListFile(configFilePath, wordsLists);
 
                 Application.Exit();
             }

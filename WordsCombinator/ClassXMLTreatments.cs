@@ -34,7 +34,10 @@ namespace WordsCombinator
     {
         private const string xmlHeader = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n";
         private const string xmlRoot = "<root></root>\n";
-        private const string xmlNodeListAttribute = "name";
+        private const string attributeName = "name";
+        private const string nodeListName = "list";
+        private const string nodeWordName = "word";
+
 
         /// <summary>
         /// 
@@ -96,7 +99,10 @@ namespace WordsCombinator
                 {
                     foreach (XmlNode nodeList in doc.DocumentElement.ChildNodes)
                     {
-                        dicoWordsLists.Add(nodeList.Attributes.GetNamedItem(xmlNodeListAttribute).Value, GetWordsFromList(nodeList));
+                        if (nodeList.Attributes.Count != 0)
+                        {
+                            dicoWordsLists.Add(nodeList.Attributes.GetNamedItem(attributeName).Value, GetWordsFromList(nodeList));
+                        }
                     }
                 }
             }
@@ -140,8 +146,8 @@ namespace WordsCombinator
         /// </summary>
         /// <param name="path"></param>
         /// <param name="nodesName"></param>
-        /// <param name="wordsList"></param>
-        public static void EditWordsListFile(string path, string nodesName, List<string> wordsList)
+        /// <param name="wordsLists"></param>
+        public static void EditWordsListFile(string path, Dictionary<string, List<string>> wordsLists)
         {
             XmlDocument doc = OpenXMLFile(path);
             try
@@ -150,13 +156,27 @@ namespace WordsCombinator
                 {
                     doc.DocumentElement.RemoveAll();
                 }
-                foreach (string word in wordsList)
+                foreach (KeyValuePair<string, List<string>> oneList in wordsLists)
                 {
+                    //ajout des listes
 
-                    XmlElement wordElement = doc.CreateElement(nodesName);
-                    wordElement.InnerXml = word;
+                    XmlElement elementList = doc.CreateElement(nodeListName);
+                    XmlAttribute xmlAttribute = doc.CreateAttribute(attributeName);
+                    xmlAttribute.Value = oneList.Key;
 
-                    doc.DocumentElement.AppendChild(wordElement);
+                    elementList.SetAttributeNode(xmlAttribute);                    
+
+
+                    //ajout des words
+
+                    foreach (string word in oneList.Value)
+                    {
+                        XmlElement element = doc.CreateElement(nodeWordName);
+                        element.InnerXml = word;
+                        elementList.AppendChild(element);
+                    }
+
+                    doc.DocumentElement.AppendChild(elementList);
                 }
                 doc.Save(path);
             }
@@ -164,6 +184,6 @@ namespace WordsCombinator
             {
                 MessageBox.Show(ex.ToString());
             }
-        }
+        }        
     }
 }
