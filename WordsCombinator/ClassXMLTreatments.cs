@@ -34,6 +34,7 @@ namespace WordsCombinator
     {
         private const string xmlHeader = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n";
         private const string xmlRoot = "<root></root>\n";
+        private const string xmlNodeListAttribute = "name";
 
         /// <summary>
         /// 
@@ -47,7 +48,7 @@ namespace WordsCombinator
             {
                 if (!File.Exists(path))
                 {
-                    FileStream fs = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);                    
+                    FileStream fs = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);
                     FileStreamUTF8Writing(ref fs, xmlHeader);
                     FileStreamUTF8Writing(ref fs, xmlRoot);
                     fs.Close();
@@ -84,25 +85,45 @@ namespace WordsCombinator
             }
         }
 
+        public static Dictionary<string, List<string>> GetWordsListsFromFile(string path)
+        {
+            Dictionary<string, List<string>> dicoWordsLists = new Dictionary<string, List<string>>();
+            try
+            {
+                XmlDocument doc = OpenXMLFile(path);
+
+                if (doc.DocumentElement.HasChildNodes)
+                {
+                    foreach (XmlNode nodeList in doc.DocumentElement.ChildNodes)
+                    {
+                        dicoWordsLists.Add(nodeList.Attributes.GetNamedItem(xmlNodeListAttribute).Value, GetWordsFromList(nodeList));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return dicoWordsLists;
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static List<string> GetWordsListFromFile(string path)
+        private static List<string> GetWordsFromList(XmlNode node)
         {
-            List<string> listBackupElements = new List<string>();
-
-            XmlDocument doc = OpenXMLFile(path);
+            List<string> listWords = new List<string>();
             try
             {
-                if (doc.DocumentElement.HasChildNodes)
+                if (node.HasChildNodes)
                 {
-                    foreach (XmlNode nodeWord in doc.DocumentElement)
+                    foreach (XmlNode nodeWord in node)
                     {
-                        if (listBackupElements.Contains(nodeWord.InnerXml) == false)
+                        if (listWords.Contains(nodeWord.InnerXml) == false)
                         {
-                            listBackupElements.Add(nodeWord.InnerXml);
+                            listWords.Add(nodeWord.InnerXml);
                         }
                     }
                 }
@@ -111,7 +132,7 @@ namespace WordsCombinator
             {
                 MessageBox.Show(ex.ToString());
             }
-            return listBackupElements;
+            return listWords;
         }
 
         /// <summary>

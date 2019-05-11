@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <root>
-  <list>
+  <list name="test1">
     <word>Toto</word>
     <word>Titi</word>
     <word>Tutu</word>
     <word>Tata</word>
   </list>
-  <list>
+  <list name ="Grec">
     <word>Alpha</word>
     <word>Beta</word>
     <word>Gamma</word>

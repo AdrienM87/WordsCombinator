@@ -53,7 +53,7 @@ namespace WordsCombinator
             {
                 this.LstInitialWords.Items.Clear();
 
-                foreach (string word in ClassXmlTreatments.GetWordsListFromFile(configFilePath))
+                foreach (string word in ClassXmlTreatments.GetWordsListsFromFile(configFilePath).Values.First())
                 {
                     this.LstInitialWords.Items.Add(word);
                 }
@@ -288,14 +288,14 @@ namespace WordsCombinator
         {
             try
             {
-                List<string> listWords = new List<string>();
+                //List<string> listWords = new List<string>();
 
-                foreach (object item in this.LstInitialWords.Items)
-                {
-                    listWords.Add((string)item);
-                }
+                //foreach (object item in this.LstInitialWords.Items)
+                //{
+                //    listWords.Add((string)item);
+                //}
 
-                ClassXmlTreatments.EditWordsListFile(configFilePath, nodesName, listWords);
+                //ClassXmlTreatments.EditWordsListFile(configFilePath, nodesName, listWords);
 
                 Application.Exit();
             }
