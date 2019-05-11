@@ -278,6 +278,7 @@ namespace WordsCombinator
                 //chargement dans la listbox du contenu sélectionné
                 string[] oneList = wordsLists[this.CbWordsLists.Text].ToArray();
 
+                this.LstInitialWords.Items.Clear();
                 this.LstInitialWords.Items.AddRange(oneList);
                 ProcessCombinations();
             }
@@ -292,12 +293,23 @@ namespace WordsCombinator
             try
             {
                 if (listSelected == null || listSelected == "" || listSelected == this.CbWordsLists.Text || wordsLists.ContainsKey(this.CbWordsLists.Text)) return;
-                
+
+                int indexCbElement = this.CbWordsLists.Items.IndexOf(listSelected);
+
                 List<string> oneList = wordsLists[listSelected];
                 wordsLists.Remove(listSelected);
 
                 listSelected = this.CbWordsLists.Text;
                 wordsLists.Add(listSelected, oneList);
+
+                this.CbWordsLists.Items.RemoveAt(indexCbElement);
+                this.CbWordsLists.Items.Add(this.CbWordsLists.Text);
+
+                if (!this.CbWordsLists.Items.Contains(NEW))
+                {
+                    this.CbWordsLists.Items.Add(NEW);
+                    wordsLists.Add(NEW, new List<string>());
+                }
             }
             catch (Exception ex)
             {
@@ -357,8 +369,17 @@ namespace WordsCombinator
         {
             try
             {
-                ClassXmlTreatments.EditWordsListFile(configFilePath, wordsLists);
+                if (wordsLists.ContainsKey(NEW))
+                {
+                    if (wordsLists[NEW].Count > 0)
+                    {
+                        MessageBox.Show("Renommer liste avant sauvegarde.");
+                        return;
+                    }
+                    else wordsLists.Remove(NEW);
+                }                    
 
+                ClassXmlTreatments.EditWordsListFile(configFilePath, wordsLists);
                 Application.Exit();
             }
             catch (Exception ex)
