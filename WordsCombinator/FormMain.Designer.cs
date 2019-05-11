@@ -94,13 +94,13 @@ namespace WordsCombinator
             // 
             // CbWordsLists
             // 
-            this.CbWordsLists.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CbWordsLists.FormattingEnabled = true;
             this.CbWordsLists.Location = new System.Drawing.Point(290, 19);
             this.CbWordsLists.Name = "CbWordsLists";
             this.CbWordsLists.Size = new System.Drawing.Size(121, 21);
             this.CbWordsLists.TabIndex = 13;
             this.CbWordsLists.SelectedIndexChanged += new System.EventHandler(this.CbWordsLists_SelectedIndexChanged);
+            this.CbWordsLists.TextChanged += new System.EventHandler(this.CbWordsLists_TextChanged);
             // 
             // groupBox1
             // 

@@ -37,6 +37,7 @@ namespace WordsCombinator
 
         Dictionary<string, List<string>> wordsLists;
         List<string> listCombinations = new List<string>();
+        string listSelected;
 
         public FormMain()
         {
@@ -106,7 +107,7 @@ namespace WordsCombinator
                 if (this.TbInitialWords.Text != "" &&
                     this.LstInitialWords.Items.Cast<string>().ToList().Contains(this.TbInitialWords.Text) == false)
                 {
-                    wordsLists[this.CbWordsLists.SelectedItem.ToString()].Add(this.TbInitialWords.Text);
+                    wordsLists[this.CbWordsLists.Text].Add(this.TbInitialWords.Text);
 
                     this.LstInitialWords.Items.Add(this.TbInitialWords.Text);
                     this.TbInitialWords.Text = "";
@@ -130,7 +131,7 @@ namespace WordsCombinator
             {
                 if (this.LstInitialWords.SelectedIndex != -1)
                 {
-                    wordsLists[this.CbWordsLists.SelectedItem.ToString()].Remove(this.LstInitialWords.SelectedItem.ToString());
+                    wordsLists[this.CbWordsLists.Text].Remove(this.LstInitialWords.SelectedItem.ToString());
 
                     this.LstInitialWords.Items.RemoveAt(this.LstInitialWords.SelectedIndex);
                     if (this.LstInitialWords.Items.Count != 0)
@@ -248,16 +249,32 @@ namespace WordsCombinator
         {
             try
             {
+                listSelected = this.CbWordsLists.SelectedText;
                 this.LstInitialWords.Items.Clear();
 
                 //chargement dans la listbox du contenu sélectionné
-                if (this.CbWordsLists.SelectedItem.ToString() != NEW)
-                {
-                    string[] oneList = wordsLists[this.CbWordsLists.SelectedItem.ToString()].ToArray();
+                if (this.CbWordsLists.Text == NEW || this.CbWordsLists.Text == "") return;
 
-                    this.LstInitialWords.Items.AddRange(oneList);
-                    ProcessCombinations();
-                }
+                string[] oneList = wordsLists[this.CbWordsLists.Text].ToArray();
+
+                this.LstInitialWords.Items.AddRange(oneList);
+                ProcessCombinations();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void CbWordsLists_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (listSelected == null || listSelected == "" || listSelected == this.CbWordsLists.SelectedText) return;
+
+                List<string> oneList = wordsLists[listSelected];
+                wordsLists.Remove(listSelected);
+                wordsLists.Add(this.CbWordsLists.Text, oneList);
             }
             catch (Exception ex)
             {
